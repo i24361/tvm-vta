@@ -55,7 +55,8 @@ class PkgConfig(object):
         "LOG_WGT_WIDTH",
         "LOG_ACC_WIDTH",
         "LOG_BATCH",
-        "LOG_BLOCK",
+        "LOG_BLOCK_IN",
+        "LOG_BLOCK_OUT",
         "LOG_UOP_BUFF_SIZE",
         "LOG_INP_BUFF_SIZE",
         "LOG_WGT_BUFF_SIZE",
@@ -65,8 +66,8 @@ class PkgConfig(object):
     def __init__(self, cfg):
 
         # Derived parameters
-        cfg["LOG_BLOCK_IN"] = cfg["LOG_BLOCK"]
-        cfg["LOG_BLOCK_OUT"] = cfg["LOG_BLOCK"]
+        cfg["LOG_BLOCK_IN"] = cfg["LOG_BLOCK_IN"]
+        cfg["LOG_BLOCK_OUT"] = cfg["LOG_BLOCK_OUT"]
         cfg["LOG_OUT_WIDTH"] = cfg["LOG_INP_WIDTH"]
         cfg["LOG_OUT_BUFF_SIZE"] = (
             cfg["LOG_ACC_BUFF_SIZE"] +
@@ -112,7 +113,8 @@ class PkgConfig(object):
         # Derive bitstream config string.
         self.bitstream = "{}x{}_i{}w{}a{}_{}_{}_{}_{}".format(
             (1 << cfg["LOG_BATCH"]),
-            (1 << cfg["LOG_BLOCK"]),
+            (1 << cfg["LOG_BLOCK_IN"]),
+            (1 << cfg["LOG_BLOCK_OUT"]),
             (1 << cfg["LOG_INP_WIDTH"]),
             (1 << cfg["LOG_WGT_WIDTH"]),
             (1 << cfg["LOG_ACC_WIDTH"]),
